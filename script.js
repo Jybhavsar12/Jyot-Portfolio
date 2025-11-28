@@ -81,18 +81,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Load projects when page loads
 document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
 
-// Use configuration from config.js
-const CONFIG = window.CONFIG || {};
+// EmailJS Configuration - Direct setup
+const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'JFiFeoR_C3j4rgPx5',
+    SERVICE_ID: 'service_fket6cq',
+    TEMPLATE_ID: 'template_r6k0qyt'
+};
 
-// Validate environment variables
-if (!CONFIG.EMAILJS_PUBLIC_KEY || !CONFIG.EMAILJS_SERVICE_ID || !CONFIG.EMAILJS_TEMPLATE_ID) {
-    console.warn('EmailJS environment variables not found. Contact form will not work.');
-}
-
-// Initialize EmailJS only if credentials are available
-if (CONFIG.EMAILJS_PUBLIC_KEY) {
-    emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
-}
+// Initialize EmailJS
+emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
 // Custom notification function
 function showNotification(title, message, type = 'success') {
@@ -133,19 +130,9 @@ function showNotification(title, message, type = 'success') {
     }, 5000);
 }
 
-// Enhanced form submission with environment variables
+// Enhanced form submission
 document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    // Check if EmailJS is configured
-    if (!CONFIG.EMAILJS_PUBLIC_KEY || !CONFIG.EMAILJS_SERVICE_ID || !CONFIG.EMAILJS_TEMPLATE_ID) {
-        showNotification(
-            'Configuration Error 🔧',
-            'Email service is not configured. Please contact me directly via email.',
-            'error'
-        );
-        return;
-    }
     
     const submitBtn = this.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
@@ -159,8 +146,8 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
         message: document.getElementById('message').value,
     };
     
-    // Use environment variables for EmailJS
-    emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, formData)
+    // Send email using EmailJS
+    emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, formData)
     .then(function(response) {
         console.log('SUCCESS!', response.status, response.text);
         showNotification(
