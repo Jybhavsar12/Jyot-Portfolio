@@ -1,0 +1,32 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff00ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#0a0a0a" stroke="url(#grad1)" stroke-width="2"/>
+  
+  <!-- Letter J with cyber effect -->
+  <path d="M12 8 L12 18 Q12 22 16 22 Q20 22 20 18 L20 16" 
+        stroke="url(#grad1)" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round"
+        filter="url(#glow)"/>
+  
+  <!-- Cyber dots -->
+  <circle cx="8" cy="12" r="1" fill="#00f5ff" opacity="0.8"/>
+  <circle cx="24" cy="12" r="1" fill="#ff00ff" opacity="0.8"/>
+  <circle cx="16" cy="6" r="1" fill="#00f5ff" opacity="0.6"/>
+  <circle cx="16" cy="26" r="1" fill="#ff00ff" opacity="0.6"/>
+</svg>
