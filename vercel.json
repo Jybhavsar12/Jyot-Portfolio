@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "config.js": {
+      "includeFiles": "config.js"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/config.js",
+      "destination": "/api/config"
+    }
+  ]
+}
